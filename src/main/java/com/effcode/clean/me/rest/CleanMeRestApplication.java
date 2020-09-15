@@ -5,14 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.effcode.clean.me.support.SmtpHandler;
+import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
 public class CleanMeRestApplication {
-    
-    @Bean
-    public SmtpHandler smtpHandler() {
-        return new SmtpHandler();
-    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(CleanMeRestApplication.class, args);

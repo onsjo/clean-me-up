@@ -1,4 +1,4 @@
-package com.effcode.clean.me.rest;
+package com.effcode.clean.me.rest.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

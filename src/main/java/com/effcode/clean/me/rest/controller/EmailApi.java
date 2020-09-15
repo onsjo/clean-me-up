@@ -1,5 +1,6 @@
-package com.effcode.clean.me.rest;
+package com.effcode.clean.me.rest.controller;
 
+import com.effcode.clean.me.rest.handler.EmailHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

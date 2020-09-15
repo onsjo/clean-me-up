@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "app.email.username",
+      "type": "java.lang.String",
+      "description": "Username to use for email."
+    },
+    {
+      "name": "app.email.password",
+      "type": "java.lang.String",
+      "description": "Password to use for email."
+    }
+  ] }

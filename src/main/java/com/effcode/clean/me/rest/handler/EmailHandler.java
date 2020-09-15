@@ -10,24 +10,27 @@ import com.effcode.clean.me.support.SmtpHandler;
 
 @Component
 public class EmailHandler {
-    
+
+    private static final Logger LOG = LoggerFactory.getLogger(EmailHandler.class);
+
     @Autowired
     SmtpHandler smtpHandler;
-    
-    Logger log = LoggerFactory.getLogger(EmailHandler.class);
+
     
     public boolean send(String adr, String subject, String content) {
-        log.debug("Adr: " + adr);
-        log.debug("Subject: " + subject);
-        log.debug("Content: " + content);
+        if( LOG.isDebugEnabled() ){
+            LOG.debug("Adr: {}, Subject: {}, Content: {}", adr, subject, content);
+        }
+
         if(subject == null) {
-            log.error("Subject is null");
+            LOG.error("Subject is null");
             return false;
         }
-        if(content.length() > 65000) {
-            log.error("Content to BIG: " + content.length());
+        if( content != null && content.length() > 65000) {
+            LOG.error("Content to BIG: {}", content.length());
             return false;
         }
+
         SmtpEmail smtpEmail = new SmtpEmail();
         smtpEmail.adrs = new String[] {adr};
         smtpEmail.content = content;
@@ -35,7 +38,9 @@ public class EmailHandler {
         smtpEmail.password =  "secret";
         smtpEmail.username = "foo";
         smtpHandler.post(smtpEmail);
-        log.info("Send email. Adr: " + adr + ", Subject: " + subject);
+
+        LOG.info("Send email. Adr: {}, Subject: {}", adr, subject);
+
         return true;
     } 
 

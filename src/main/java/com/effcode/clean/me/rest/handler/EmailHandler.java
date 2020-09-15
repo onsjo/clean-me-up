@@ -13,10 +13,14 @@ public class EmailHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(EmailHandler.class);
 
-    @Autowired
-    SmtpHandler smtpHandler;
+    private final SmtpHandler smtpHandler;
 
-    
+
+    public EmailHandler(SmtpHandler smtpHandler) {
+        this.smtpHandler = smtpHandler;
+    }
+
+
     public boolean send(String adr, String subject, String content) {
         if( LOG.isDebugEnabled() ){
             LOG.debug("Adr: {}, Subject: {}, Content: {}", adr, subject, content);

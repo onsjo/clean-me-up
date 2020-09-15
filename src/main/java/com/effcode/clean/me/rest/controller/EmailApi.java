@@ -1,7 +1,6 @@
 package com.effcode.clean.me.rest.controller;
 
 import com.effcode.clean.me.rest.handler.EmailHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class EmailApi {
 
-    @Autowired
-    EmailHandler emailHandler;
+    private final EmailHandler emailHandler;
+
+
+    public EmailApi(EmailHandler emailHandler) {
+        this.emailHandler = emailHandler;
+    }
+
 
     @RequestMapping("/")
     public ResponseEntity<Void> send(@RequestParam String adr, @RequestParam String subject,

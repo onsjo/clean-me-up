@@ -1,7 +1,7 @@
 package com.effcode.clean.me.rest.controller;
 
 import com.effcode.clean.me.rest.dto.EmailModel;
-import com.effcode.clean.me.rest.service.EmailHandler;
+import com.effcode.clean.me.rest.service.EmailHandlerService;
 import com.effcode.clean.me.rest.service.ValidationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +31,7 @@ class EmailApiControllerTest {
     @MockBean
     private ValidationService validationService;
     @MockBean
-    private EmailHandler emailHandler;
+    private EmailHandlerService emailHandler;
 
 
     @Value("${app.auth.username}")

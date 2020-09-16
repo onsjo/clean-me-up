@@ -2,7 +2,7 @@ package com.effcode.clean.me.rest.controller;
 
 import com.effcode.clean.me.rest.dto.EmailModel;
 import com.effcode.clean.me.rest.exceptions.EmailValidationException;
-import com.effcode.clean.me.rest.service.EmailHandler;
+import com.effcode.clean.me.rest.service.EmailHandlerService;
 import com.effcode.clean.me.rest.service.ValidationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,10 +23,10 @@ public class EmailApiController {
 
     private static final Logger LOG = LoggerFactory.getLogger(EmailApiController.class);
 
-    private final EmailHandler emailHandler;
+    private final EmailHandlerService emailHandler;
     private final ValidationService validationService;
 
-    public EmailApiController(EmailHandler emailHandler, ValidationService validationService) {
+    public EmailApiController(EmailHandlerService emailHandler, ValidationService validationService) {
         this.emailHandler = emailHandler;
         this.validationService = validationService;
     }

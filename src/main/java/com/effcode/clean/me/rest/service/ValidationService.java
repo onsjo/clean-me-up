@@ -2,40 +2,28 @@ package com.effcode.clean.me.rest.service;
 
 import com.effcode.clean.me.rest.dto.EmailModel;
 import com.effcode.clean.me.rest.exceptions.EmailValidationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.Set;
 
 @Service
 public class ValidationService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ValidationService.class);
+
     public void validateEmail(final EmailModel email) throws EmailValidationException {
-        if (email == null) {
-            throw new IllegalArgumentException("Email was null.");
-        }
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
 
-        if (!isValidEmailAddress(email.getAddress())) {
-            throw new EmailValidationException("address");
-        }
+        Set<ConstraintViolation<EmailModel>> violations = validator.validate(email);
 
-        // TODO: add validation below:
-        /*
-        if(subject == null) {
-            LOG.error("Subject is null");
-            return false;
-        }
-        if( content != null && content.length() > 65000) {
-            LOG.error("Content to BIG: {}", content.length());
-            return false;
-        }
-        */
-    }
-
-    private boolean isValidEmailAddress(String address) {
-        if (StringUtils.isEmpty(address)) return false;
-
-        // TODO: add regex email address validation, or fancier?
-
-        return true;
+        if (!violations.isEmpty()) throw new EmailValidationException(violations);
     }
 
 }

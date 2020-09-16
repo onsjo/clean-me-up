@@ -16,6 +16,7 @@
 * Add unit tests (ongoing)
 * Extract interface(s)
 * Validate/sanity check input (started)
+** Did I see something about a max length for content?
 * Secrets in external storage (like Vault)
 * Domain object to wrap bad legacy SmtpEmail (could probably do better, builder perhaps?)
 * Create dockerfile

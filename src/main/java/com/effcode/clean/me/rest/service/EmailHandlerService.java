@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailHandler {
+public class EmailHandlerService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(EmailHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EmailHandlerService.class);
 
     private final SmtpHandler smtpHandler;
 
@@ -23,7 +23,7 @@ public class EmailHandler {
     private String emailPassword;
 
 
-    public EmailHandler(SmtpHandler smtpHandler) {
+    public EmailHandlerService(SmtpHandler smtpHandler) {
         this.smtpHandler = smtpHandler;
     }
 

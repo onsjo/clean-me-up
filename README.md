@@ -9,3 +9,5 @@
 * Validate/sanity check input (started)
 * Secrets in external storage (like Vault)
 * Domain object to wrap bad legacy SmtpEmail (could probably do better, builder perhaps?)
+* API documentation generation
+* Spring security (oauth2 maybe?)

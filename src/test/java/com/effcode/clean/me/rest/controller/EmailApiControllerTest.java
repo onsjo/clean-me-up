@@ -31,12 +31,12 @@ class EmailApiControllerTest {
     @MockBean
     private EmailHandler emailHandler;
 
+
     @Test
     void sendEmptyBodyEmail() throws Exception {
         mockMvc.perform(post("/")
                 .contentType("application/json"))
                 .andExpect(status().isBadRequest());
-
     }
 
     @Test

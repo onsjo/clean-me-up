@@ -27,7 +27,7 @@ class EmailHandlerTest {
     private EmailHandler emailHandler;
 
     @Test
-    void send() {
+    void sendBasicEmail() {
         Mockito.doNothing().when(smtpHandler).post(any(SmtpEmail.class));
 
         String address = "some@adreess.com";

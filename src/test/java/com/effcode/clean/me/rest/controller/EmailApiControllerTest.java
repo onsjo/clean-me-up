@@ -3,6 +3,7 @@ package com.effcode.clean.me.rest.controller;
 import com.effcode.clean.me.rest.dto.EmailModel;
 import com.effcode.clean.me.rest.service.EmailHandler;
 import com.effcode.clean.me.rest.service.ValidationService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,23 +41,38 @@ class EmailApiControllerTest {
 
 
     @Test
+    void dontAllowUnauthorizedSending() throws Exception {
+        mockMvc.perform(post("/email/send")
+                .contentType("application/json")
+                .content(getNewEmail())
+        ).andExpect(status().isUnauthorized());
+    }
+
+    @Test
     void sendEmptyBodyEmail() throws Exception {
         mockMvc.perform(post("/email/send")
                 .with(user(username).password(password))
-                .contentType("application/json"))
-                .andExpect(status().isBadRequest());
+                .contentType("application/json")
+        ).andExpect(status().isBadRequest());
     }
 
     @Test
     void sendEmail() throws Exception {
-        EmailModel email = new EmailModel("my@test.se", "lala", "hej hej\n\npå dig!");
-
         mockMvc.perform(post("/email/send")
                 .with(user(username).password(password))
                 .contentType("application/json")
-                .content(objectMapper.writeValueAsString(email))
+                .content(getNewEmail())
         ).andExpect(status().isNoContent());
 
+    }
+
+
+    private String getNewEmail() {
+        try {
+            return objectMapper.writeValueAsString(new EmailModel("my@test.se", "lala", "hej hej\n\npå dig!"));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Unable to create test email string.", e);
+        }
     }
 
 }

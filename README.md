@@ -16,8 +16,12 @@
 * Add unit tests (ongoing)
 * Extract interface(s)
 * Validate/sanity check input (started)
-** Did I see something about a max length for content?
+    * Did I see something about a max length for content?
 * Secrets in external storage (like Vault)
 * Domain object to wrap bad legacy SmtpEmail (could probably do better, builder perhaps?)
 * Create dockerfile
 * Change to Oauth2 in WebSecurityConfig
+
+* Add Prometheus metrics to enable monitoring
+* Add Splunk logging, with json log formatter
+* Add Gitlab/Github pipeline config

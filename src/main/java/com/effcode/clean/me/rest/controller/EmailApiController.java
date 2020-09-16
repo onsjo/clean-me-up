@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/email")
 public class EmailApiController {
@@ -39,11 +41,14 @@ public class EmailApiController {
             @ApiResponse(responseCode = "400", description = "You did something wrong."),
             @ApiResponse(responseCode = "500", description = "We did something wrong.")
     })
-    public ResponseEntity<Void> send(@RequestBody EmailModel email) {
+    public ResponseEntity<Void> send(@RequestBody EmailModel email, HttpServletRequest request) {
+        MDC.put("remoteIp", request.getRemoteAddr());
+        LOG.info("Processing email send requests.");
+
         try {
             validationService.validateEmail(email);
         } catch (EmailValidationException e) {
-            LOG.error("Invalid email data provided.", e);
+            LOG.error("Invalid email data provided: {}", e.getMessage());
             MDC.clear();
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         }

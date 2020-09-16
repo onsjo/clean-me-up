@@ -41,7 +41,7 @@ class EmailApiControllerTest {
 
     @Test
     void sendEmptyBodyEmail() throws Exception {
-        mockMvc.perform(post("/")
+        mockMvc.perform(post("/email/send")
                 .with(user(username).password(password))
                 .contentType("application/json"))
                 .andExpect(status().isBadRequest());
@@ -51,7 +51,7 @@ class EmailApiControllerTest {
     void sendEmail() throws Exception {
         EmailModel email = new EmailModel("my@test.se", "lala", "hej hej\n\npå dig!");
 
-        mockMvc.perform(post("/")
+        mockMvc.perform(post("/email/send")
                 .with(user(username).password(password))
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(email))

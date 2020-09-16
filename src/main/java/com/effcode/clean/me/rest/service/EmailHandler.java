@@ -35,7 +35,7 @@ public class EmailHandler {
 
         smtpHandler.post(convertToSmptEmail(email));
 
-        LOG.info("Send email. Adr: {}, Subject: {}", email.getAddress(), email.getSubject());
+        LOG.info("Sent email. Adr: {}, Subject: {}", email.getAddress(), email.getSubject());
     }
 
 

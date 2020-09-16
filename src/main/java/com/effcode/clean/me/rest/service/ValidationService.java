@@ -9,11 +9,11 @@ import org.springframework.util.StringUtils;
 public class ValidationService {
 
     public void validateEmail(final EmailModel email) throws EmailValidationException {
-        if( email == null ){
+        if (email == null) {
             throw new IllegalArgumentException("Email was null.");
         }
 
-        if( !isValidEmailAddress(email.getAddress()) ){
+        if (!isValidEmailAddress(email.getAddress())) {
             throw new EmailValidationException("address");
         }
 
@@ -31,10 +31,11 @@ public class ValidationService {
     }
 
     private boolean isValidEmailAddress(String address) {
-        if( StringUtils.isEmpty(address) ) return false;
+        if (StringUtils.isEmpty(address)) return false;
 
         // TODO: add regex email address validation, or fancier?
 
         return true;
     }
+
 }

@@ -23,5 +23,9 @@
 * Change to Oauth2 in WebSecurityConfig
 
 * Add Prometheus metrics to enable monitoring
-* Add Splunk logging, with json log formatter
+* Add Splunk/Kibana logging, with json log formatter
 * Add Gitlab/Github pipeline config
+
+* With a more complex functionality Cucumber tests might be suitable
+
+* Would this application hold up under load?

@@ -28,6 +28,7 @@ class EmailApiControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+
     @MockBean
     private ValidationService validationService;
     @MockBean
@@ -39,6 +40,20 @@ class EmailApiControllerTest {
     @Value("${app.auth.password}")
     private String password;
 
+    @Value("${app.auth.username2}")
+    private String username2;
+    @Value("${app.auth.password2}")
+    private String password2;
+
+
+    @Test
+    void dontAllowInvalidRole() throws Exception {
+        mockMvc.perform(post("/email/send")
+                .with(user(username2).password(password2))
+                .contentType("application/json")
+                .content(getNewEmail())
+        ).andExpect(status().isForbidden());
+    }
 
     @Test
     void dontAllowUnauthorizedSending() throws Exception {
@@ -59,11 +74,10 @@ class EmailApiControllerTest {
     @Test
     void sendEmail() throws Exception {
         mockMvc.perform(post("/email/send")
-                .with(user(username).password(password))
+                .with(user(username).password(password).roles("MAIL_SENDER"))
                 .contentType("application/json")
                 .content(getNewEmail())
         ).andExpect(status().isNoContent());
-
     }
 
 

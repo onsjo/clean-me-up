@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class EmailApiController {
 
 
     @PostMapping(value = "/send", consumes = "application/json")
+    @PreAuthorize("hasRole('MAIL_SENDER')")
     @Operation(summary = "Sends an email through our ancient legacy system.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "The email is sent successfully."),
@@ -50,15 +52,18 @@ public class EmailApiController {
         } catch (EmailValidationException e) {
             LOG.error("Invalid email data provided: {}", e.getMessage());
             MDC.clear();
-            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
         MDC.put("emailAddress", email.getAddress());
         MDC.put("emailSubject", email.getSubject());
 
         LOG.info("Sending email.");
         emailHandler.send(email);
+
         MDC.clear();
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

@@ -5,7 +5,9 @@
 
 ## Running
 
-* curl http://localhost:8080/email/send -H "Authorization: Basic dGVtcDp0ZW1w" -H "Content-Type: application/json" --data "{ \"address\": \"jo@test.se\", \"subject\": \"lala\", \"content\": \"asd\n\nhej\" }" -D -
+* VALID: curl http://localhost:8080/email/send -H "Authorization: Basic dGVtcDp0ZW1w" -H "Content-Type: application/json" --data "{ \"address\": \"jo@test.se\", \"subject\": \"lala\", \"content\": \"asd\n\nhej\" }" -D -
+* Forbidden: curl http://localhost:8080/email/send -H "Authorization: Basic bm86bm8=" -H "Content-Type: application/json" --data "{ \"address\": \"jo@test.se\", \"subject\": \"lala\", \"content\": \"asd\n\nhej\", \"test\": \"hmm\" }" -D -
+* Unauthorized: curl http://localhost:8080/email/send -H "Content-Type: application/json" --data "{ \"address\": \"jo@test.se\", \"subject\": \"lala\", \"content\": \"asd\n\nhej\", \"test\": \"hmm\" }" -D -
 
 ## Documentation
 

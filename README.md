@@ -12,6 +12,11 @@
 * http://localhost:8080/v3/api-docs/
 * http://localhost:8080/swagger-ui.html
 
+## Versions
+
+* 0.1.0: Cleanup and API changes
+* 0.0.1: Initial
+
 ## TODO:
 * Add unit tests (ongoing)
 * Extract interface(s)

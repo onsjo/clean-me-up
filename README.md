@@ -19,7 +19,7 @@
     * Did I see something about a max length for content?
 * Secrets in external storage (like Vault)
 * Domain object to wrap bad legacy SmtpEmail (could probably do better, builder perhaps?)
-* Create dockerfile
+* Create docker-compose for dev to enable easy usage of depending systems
 * Change to Oauth2 in WebSecurityConfig
 
 * Add Prometheus metrics to enable monitoring
